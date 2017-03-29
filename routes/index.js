@@ -57,7 +57,7 @@ router.post('/', function(req, res, next) {
 		.then(name => {
 			bot.replyTextMessage(replyToken, 'สวัสดีค่ะ ' + name + ' ^^')
 				.then(function(data) {
-					bot.pushStickerMessage(userId, 1, 1)
+					bot.pushStickerMessage(userId, 2, 34)
 						.then()
 						.catch(err => console.log(err));
 				})
