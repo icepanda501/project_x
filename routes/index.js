@@ -7,7 +7,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-	console.log(req.body)
+	var data = req.body
+	console.log(data)
+	console.log(data.source)
 	res.send({ test: "test" })
 })
 
