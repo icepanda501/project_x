@@ -45,7 +45,7 @@ router.post('/', function(req, res, next) {
 			})
 		})
 		.then(name => {
-			bot.replyTextMessage(replyToken, 'hi ' + name + '^^')
+			bot.replyTextMessage(replyToken, 'สวัสดีค่ะ ' + name + ' ^^')
 				.then(function(data) {
 					console.log(data)
 				})
