@@ -43,27 +43,37 @@ router.post('/', function(req, res, next) {
 	console.log(data.source)
 	let replyToken = data.replyToken
 	let userId = data.source.userId
-	bot.getProfile(userId)
-		.then(data => {
-			return new Promise((resolve, reject) => {
-				try {
-					console.log(data.displayName)
-					resolve(data.displayName)
-				} catch (err) {
-					reject(err)
-				}
-			})
-		})
-		.then(name => {
-			bot.replyTextMessage(replyToken, 'สวัสดีค่ะ ' + name + ' ^^')
-				.then(function(data) {
-					bot.pushStickerMessage(userId, 2, 34)
-						.then()
-						.catch(err => console.log(err));
+	let message = data.message.text
+
+
+	let jennySayHi => {
+		bot.getProfile(userId)
+			.then(data => {
+				return new Promise((resolve, reject) => {
+					try {
+						console.log(data.displayName)
+						resolve(data.displayName)
+					} catch (err) {
+						reject(err)
+					}
 				})
-				.catch(err => console.log(err))
-		})
-		.catch(err => console.log(err))
+			})
+			.then(name => {
+				bot.replyTextMessage(replyToken, 'สวัสดีค่ะ ' + name + ' ^^')
+					.then(function(data) {
+						bot.pushStickerMessage(userId, 2, 34)
+							.then()
+							.catch(err => console.log(err));
+					})
+					.catch(err => console.log(err))
+			})
+			.catch(err => console.log(err))
+	}
+
+	if (message.includes("hi")) {
+		jennySayHi()
+	}
+
 	res.send({ test: "test" })
 })
 
