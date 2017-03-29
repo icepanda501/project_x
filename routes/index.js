@@ -35,7 +35,7 @@ router.post('/', function(req, res, next) {
 	var data = req.body.events
 	console.log(data)
 	console.log(data[0].source)
-	var replyToken = data.replyToken
+	var replyToken = data[0].replyToken
 	var userId = data[0].source.userId
 	bot.getProfile(userId)
 		.then(data => {
