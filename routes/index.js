@@ -46,8 +46,12 @@ router.post('/', function(req, res, next) {
 	bot.getProfile(userId)
 		.then(data => {
 			return new Promise((resolve, reject) => {
-				console.log(data.displayName)
-				resolve(data.displayName)
+				try {
+					console.log(data.displayName)
+					resolve(data.displayName)
+				} catch (err) {
+					reject(err)
+				}
 			})
 		})
 		.then(name => {
