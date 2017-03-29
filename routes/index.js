@@ -46,7 +46,7 @@ router.post('/', function(req, res, next) {
 	let message = data.message.text
 
 
-	let jennySayHi => {
+	let jennySayHi = () => {
 		bot.getProfile(userId)
 			.then(data => {
 				return new Promise((resolve, reject) => {
