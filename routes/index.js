@@ -36,18 +36,22 @@ router.post('/', function(req, res, next) {
 	console.log(data)
 	console.log(data[0].source)
 	var replyToken = data.replyToken
-	var userId = data.source.userId
+	var userId = data[0].source.userId
 	bot.getProfile(userId)
 		.then(data => {
 			return Promise((resolve, reject) => {
+				console.log(data.displayName)
 				resolve(data.displayName)
 			})
-		}).then(name => {
+		})
+		.then(name => {
 			bot.replyTextMessage(replyToken, 'hi ' + name + '^^')
 				.then(function(data) {
 					console.log(data)
 				})
-		}).catch(err => console.log(err))
+				.catch(err => console.log(err))
+		})
+		.catch(err => console.log(err))
 	res.send({ test: "test" })
 })
 
