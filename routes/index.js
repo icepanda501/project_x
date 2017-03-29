@@ -39,7 +39,7 @@ router.post('/', function(req, res, next) {
 	var userId = data[0].source.userId
 	bot.getProfile(userId)
 		.then(data => {
-			return Promise((resolve, reject) => {
+			return new Promise((resolve, reject) => {
 				console.log(data.displayName)
 				resolve(data.displayName)
 			})
