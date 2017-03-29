@@ -13,15 +13,21 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/sendMsg', function(req, res, next) {
-	var msg = "test 1 "
-	var userId = "U3727f363a9782fb3b93b59b77d454433"
+	let msg = "test 1 "
+	let userId = "U3727f363a9782fb3b93b59b77d454433"
 	bot.pushTextMessage(userId, msg)
 	res.send({ status: 0, data: msg })
 })
 
+router.get('/sendSticker', (req, res, next) => {
+	let userId = "U3727f363a9782fb3b93b59b77d454433"
+	bot.pushStickerMessage(userId, 1, 1);
+	res.send({ status: 0, data: "sendSticker" })
+})
+
 router.get('/getProfile', function(req, res, next) {
-	var msg = "test 1 "
-	var userId = "U3727f363a9782fb3b93b59b77d454433"
+	let msg = "test 1 "
+	let userId = "U3727f363a9782fb3b93b59b77d454433"
 	bot.getProfile(userId)
 		.then((data) => {
 			console.log(data)
@@ -32,11 +38,11 @@ router.get('/getProfile', function(req, res, next) {
 })
 
 router.post('/', function(req, res, next) {
-	var data = req.body.events
+	let data = req.body.events[0]
 	console.log(data)
-	console.log(data[0].source)
-	var replyToken = data[0].replyToken
-	var userId = data[0].source.userId
+	console.log(data.source)
+	let replyToken = data.replyToken
+	let userId = data.source.userId
 	bot.getProfile(userId)
 		.then(data => {
 			return new Promise((resolve, reject) => {
@@ -47,7 +53,7 @@ router.post('/', function(req, res, next) {
 		.then(name => {
 			bot.replyTextMessage(replyToken, 'สวัสดีค่ะ ' + name + ' ^^')
 				.then(function(data) {
-					console.log(data)
+					bot.pushStickerMessage(userId, 34, 2);
 				})
 				.catch(err => console.log(err))
 		})
